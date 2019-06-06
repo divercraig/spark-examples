@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+version = '1.0'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Spark Examples',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.apache.spark', name: 'spark-core_2.11', version: '2.4.3'
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/java'
+}
