@@ -5,10 +5,17 @@ A sandbox project for learning the basics of Spark. I'll add multiple examples a
 * Java 1.8
 * Spark 2.4.3
 
-## Building
+Spark 2.4 is not compatible with Java versions greater than 1.8. Problems with building or testing in an IDE can occur
+if the ID is using a newer version of java to run gradle or the test runner.
+
+## Wordcounts
+Simple word count example
+
+### Building
 Execute `./gradlew build`
 
-## Running
-
-### Word Count
+### Running
 Execute `spark-submit --class example.WordCount ./build/libs/spark-examples-1.0.jar <input text file> <output directory>`
+
+### Testing
+Execute `./gradlew test`
