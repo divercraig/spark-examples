@@ -18,12 +18,16 @@ public class WordCount {
 
     /**
      * @param stringRDD the RDD containing Strings to be word counted
-     * @return A Tuple RDD key'd by the word with a value of the number of instances of the word
+     * @return A Tuple RDD key'd by the word with a value of the number of instances of the word. The returned
+     * RDD is ordered by the count of the word in descending order.
      */
     static JavaPairRDD<String, Integer> count(JavaRDD<String> stringRDD) {
         return stringRDD
                 .flatMap((String x) -> Arrays.asList(x.split(" ")).iterator())
                 .mapToPair((String x) -> new Tuple2<>(x, 1))
-                .reduceByKey(Integer::sum);
+                .reduceByKey(Integer::sum)
+                .mapToPair(Tuple2<String, Integer>::swap)
+                .sortByKey(false)
+                .mapToPair(Tuple2<Integer, String>::swap);
     }
 }

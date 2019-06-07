@@ -20,9 +20,9 @@ public class WordCountTest extends SharedJavaSparkContext {
         JavaPairRDD<String, Integer> result = WordCount.count(inputRDD);
 
         List<Tuple2<String, Integer>> expectedOutput = Arrays.asList(
-                new Tuple2<>("cat", 1),
+                new Tuple2<>("bird", 3),
                 new Tuple2<>("dog", 2),
-                new Tuple2<>("bird", 3)
+                new Tuple2<>("cat", 1)
         );
         JavaPairRDD<String, Integer> expectedRDD = jsc().parallelizePairs(expectedOutput);
 
@@ -31,7 +31,7 @@ public class WordCountTest extends SharedJavaSparkContext {
                         .apply(Tuple2.class);
 
 
-        JavaRDDComparisons.assertRDDEquals(
+        JavaRDDComparisons.assertRDDEqualsWithOrder(
                 JavaRDD.fromRDD(JavaPairRDD.toRDD(result), tag),
                 JavaRDD.fromRDD(JavaPairRDD.toRDD(expectedRDD), tag)
         );
