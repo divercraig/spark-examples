@@ -9,4 +9,4 @@ out
 .idea
 
 # Ignore output directories for examples
-wordcounts
+output
